@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="datasource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/sitemojaco"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value=""></property>
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="datasource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>org.ensah.system.beans.User</value>
+				<value>org.ensah.system.beans.Post</value>
+				<value>org.ensah.system.beans.Comment</value>
+				<value>org.ensah.system.beans.Notification</value>
+				<value>org.ensah.system.beans.Wordpolarity</value>
+				<value>org.ensah.system.beans.Admin</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+   		<!-- one of the properties available; the maximum file size in bytes (2097152 B = 2 MB) -->
+    	<property name="maxUploadSize" value="20097152 "/>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="wordpolarityDao" class="org.ensah.system.dao.impl.WordpolarityDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="wordpolarityService" class="org.ensah.system.service.impl.WordpolarityServiceImpl">
+		<property name="wordpolarityDao" ref="wordpolarityDao"></property>
+	</bean>
+	
+	<bean id="notificationDao" class="org.ensah.system.dao.impl.NotificationDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="notificationService" class="org.ensah.system.service.impl.NotificationServiceImpl">
+		<property name="notificationDao" ref="notificationDao"></property>
+	</bean>
+	
+	<bean id="commentDao" class="org.ensah.system.dao.impl.CommentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="commentService" class="org.ensah.system.service.impl.CommentServiceImpl">
+		<property name="commentDao" ref="commentDao"></property>
+	</bean>
+	
+	<bean id="postDao" class="org.ensah.system.dao.impl.PostDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="postService" class="org.ensah.system.service.impl.PostServiceImpl">
+		<property name="postDao" ref="postDao"></property>
+	</bean>
+	
+	<bean id="userDao" class="org.ensah.system.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="userService" class="org.ensah.system.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<bean id="adminDao" class="org.ensah.system.dao.impl.AdminDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="adminService" class="org.ensah.system.service.impl.AdminServiceImpl">
+		<property name="adminDao" ref="adminDao"></property>
+	</bean>
+		
+</beans>

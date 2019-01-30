@@ -1,0 +1,62 @@
+@import url(https://fonts.googleapis.com/css?family=Sniglet|Raleway:900)
+	;
+
+body, html {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	font-family: 'Sniglet', cursive;
+}
+
+header, .footer{
+	height: 90px;
+	width: 100%;
+	background: #383636;
+	border: 1px solid #383636;
+}
+
+.footer{
+	height: 70px;
+}
+
+.img-circle {
+	border-radius: 50%;
+	border: 1.7px solid #f38e9d;
+	display: block;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+a {
+	color: #f38e9d;
+	display: block;
+	font-weight: normal;
+	font-size: 1.3em;
+	font-family: 'Raleway', sans-serif;
+	margin-top: -40px;
+	margin-left: 85px;
+}
+
+.user:hover {
+	color: #ffffff;
+}
+
+.hButtons{
+	margin-top: -55px;
+}
+
+.Home{
+	margin-top: -50px;
+}
+.Notif{
+
+	margin-left: 1398px;
+}
+
+.Param{
+	margin-left: 1436px;
+}
+
+.Logout{
+	margin-left: 1474px;
+}
